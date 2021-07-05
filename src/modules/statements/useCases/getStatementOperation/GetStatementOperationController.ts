@@ -8,11 +8,13 @@ export class GetStatementOperationController {
     const { id: user_id } = request.user;
     const { statement_id } = request.params;
 
-    const getStatementOperation = container.resolve(GetStatementOperationUseCase);
+    const getStatementOperation = container.resolve(
+      GetStatementOperationUseCase
+    );
 
     const statementOperation = await getStatementOperation.execute({
       user_id,
-      statement_id
+      statement_id,
     });
 
     return response.json(statementOperation);
