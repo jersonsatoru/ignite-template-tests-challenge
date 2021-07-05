@@ -1,3 +1,7 @@
-import { createConnection } from 'typeorm';
+import { Connection, createConnection } from 'typeorm';
 
-(async () => await createConnection())();
+export default async function getConnection(): Promise<Connection> {
+  const conn = await createConnection();
+  await import('../shared/container');
+  return conn;
+}
