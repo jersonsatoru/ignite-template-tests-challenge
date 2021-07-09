@@ -14,8 +14,9 @@ export class TransferStatementUseCase {
   ) {}
 
   async execute(request: TransferStatementRequestDto): Promise<void> {
-    const { send_user_id, destination_user_id, amount, description } = request;
-    const sender = await this.usersRepository.findById(send_user_id);
+    const { sender_user_id, destination_user_id, amount, description } =
+      request;
+    const sender = await this.usersRepository.findById(sender_user_id);
 
     if (!sender) {
       throw new TransferStatementError.UserNotFoundError();
@@ -30,7 +31,9 @@ export class TransferStatementUseCase {
     }
 
     const { balance: senderBalance } =
-      await this.statementsRepository.getUserBalance({ user_id: send_user_id });
+      await this.statementsRepository.getUserBalance({
+        user_id: sender_user_id,
+      });
 
     if (amount > senderBalance) {
       throw new TransferStatementError.OutOfFundError();
@@ -48,7 +51,7 @@ export class TransferStatementUseCase {
       description,
       type: OperationType.TRANSFER,
       user_id: destination.id as string,
-      sender_id: send_user_id,
+      sender_id: sender_user_id,
     });
   }
 }

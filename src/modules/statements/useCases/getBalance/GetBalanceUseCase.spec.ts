@@ -107,7 +107,7 @@ describe('Get balance', () => {
       amount: 500,
       description: 'PIX',
       destination_user_id: sabrina.id as string,
-      send_user_id: jerson.id as string,
+      sender_user_id: jerson.id as string,
     });
 
     const sabrinaBalance = await statementsRepository.getUserBalance({

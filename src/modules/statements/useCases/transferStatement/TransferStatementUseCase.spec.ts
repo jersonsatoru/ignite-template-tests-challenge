@@ -37,7 +37,7 @@ describe('Transfer statement use case', () => {
         amount: 100,
         description: 'Payment',
         destination_user_id: v4(),
-        send_user_id: v4(),
+        sender_user_id: v4(),
       })
     ).rejects.toEqual(new TransferStatementError.UserNotFoundError());
   });
@@ -48,7 +48,7 @@ describe('Transfer statement use case', () => {
         amount: 100,
         description: 'Payment',
         destination_user_id: v4(),
-        send_user_id: v4(),
+        sender_user_id: v4(),
       })
     ).rejects.toEqual(new TransferStatementError.UserNotFoundError());
   });
@@ -77,7 +77,7 @@ describe('Transfer statement use case', () => {
       amount: 100,
       description: 'Payment',
       destination_user_id: destination.id as string,
-      send_user_id: sender.id as string,
+      sender_user_id: sender.id as string,
     });
 
     const { balance: sendBalance } = await statementsRepository.getUserBalance({
@@ -118,7 +118,7 @@ describe('Transfer statement use case', () => {
         amount: 300,
         description: 'Payment',
         destination_user_id: destination.id as string,
-        send_user_id: sender.id as string,
+        sender_user_id: sender.id as string,
       })
     ).rejects.toEqual(new TransferStatementError.OutOfFundError());
   });
