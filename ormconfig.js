@@ -4,7 +4,7 @@ module.exports = {
   name: 'default',
   type: 'postgres',
   host: 'localhost',
-  port: 5432,
+  port: +process.env.DB_PORT,
   database: process.env.DB_NAME,
   entities: ['./src/modules/**/entities/*.ts'],
   migrations: ['./src/database/migrations/*.ts'],
